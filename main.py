@@ -1,0 +1,28 @@
+import openai 
+import streamlit as st 
+import config 
+
+openai.api_key = config.API_KEY 
+
+def generate_response(prompt):
+    completion = openai.Completion.create(engine="text-davinci-003",
+                                          prompt=prompt,
+                                          max_tokens=1024,
+                                          temperature=0.3) 
+    message = completion.choices[0].text 
+    return message 
+
+st.title("""
+         GPTAI for HOPT
+         """)
+
+def get_text():
+    input_text = st.text_input("HOPT: ",)
+    return input_text 
+
+user_input = get_text()
+
+if user_input:
+    st.text_area("GPTAI", value=generate_response(user_input), height=600, max_chars=None)
+else:
+    st.text_area("GPTAI", value="Mời HOPT nhập vào!!!", height=600, max_chars=None)
