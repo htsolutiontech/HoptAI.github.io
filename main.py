@@ -1,8 +1,8 @@
-import openai 
-import streamlit as st 
-import config 
+import openai
+import streamlit as st
 
-openai.api_key = config.API_KEY 
+openai.api_key = st.secrets["KEY"]["API_KEY"]
+
 
 def generate_response(prompt):
     completion = openai.Completion.create(engine="text-davinci-003",
